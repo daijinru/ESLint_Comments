@@ -1,6 +1,7 @@
 /**
  * ESLint
- * 
+ * Version 20180504
+ * 以下内容包括 "eslint:recommend" + 我们自定义的配置
  */
 module.exports = {
     "env": {
@@ -9,6 +10,13 @@ module.exports = {
         "es6": true,
         "node": true
     },
+    globals: {
+        "wx": true,
+        "App": true,
+        "Page": true,
+        "getApp": true
+    },
+    "extends": "eslint:recommended",
     "root": true,
     "parserOptions": {
         "ecmaVersion": 2017,
@@ -23,6 +31,7 @@ module.exports = {
         "no-console": "off",
 
         /**
+         * @TODO 某些特定UI下会使用全角空格，例如 label 的对齐
          * 禁止使用空白字符，
          * 例如全角空格，
          * 忽略字符串，正则或者模版字符串
@@ -38,49 +47,6 @@ module.exports = {
         ],
 
         /**
-         * 禁止多行语句
-         * 例如
-         * const foo = bar
-         * (1 || 2).baz();
-         */
-        "no-unexpected-multiline" : "warn",
-
-        /**
-         * 强制 typeof 比较的对象必须是正确的对象
-         * 例如 undefined, object, boolean, number, string, function, symbol
-         */
-        "valid-typeof": "error",
-
-        /**
-         * 禁止在代码块内出现函数声明
-         */
-        "no-inner-declarations": "error",
-
-        /**
-         * 禁止多余的分号
-         * 例如 ;;
-         */
-        "no-extra-semi": "warn",
-
-        /**
-         * 禁止对象内有多余的属性名
-         * 例如 { test: 'test1', test: 'test2' }
-         */
-        "no-dupe-keys": "error",
-
-        /**
-         * 禁止函数有重复的参数名
-         */
-        "no-dupe-args": "error",
-
-        /**
-         * 禁止空的函数块
-         * 例如
-         * if (foo) {}
-         */
-        "no-empty": "error",
-
-        /**
          * 将 var 定义的变量视为块作用域，禁止在块代码外使用
          * 例如
          * if (foo) {
@@ -91,9 +57,10 @@ module.exports = {
         "block-scoped-var": "error",
 
         /**
-         * 建议在类中使用 this
+         * 关闭在类中建议使用 this 的建议
+         * 在类中使用 this
          */
-        "class-methods-use-this": "warn",
+        "class-methods-use-this": "off",
 
         /**
          * 建议 switch 保留有 default 分支
@@ -132,11 +99,6 @@ module.exports = {
                 }
             }
         ],
-
-        /**
-         * 放弃在函数内顶部使用 var 声明的规则
-         */
-        "vars-on-top": "off",
 
         /**
          * @TODO 待议
@@ -247,28 +209,23 @@ module.exports = {
         ],
 
         /**
-         * 禁止空格和 tab 混用
-         */
-        "no-mixed-spaces-and-tabs": "error",
-
-        /**
-         * 禁止出现多行空行
+         * 禁止出现多行空行，最大数为 2 行
          * 例如
          * function add(x, y) {
          *     
          * }
          */
-        "no-multiple-empty-lines": "error",
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 2
+            }
+        ],
 
         /**
          * 禁止 tabs
          */
         "no-tabs": "error",
-
-        /**
-         * 禁止代码行尾的空格
-         */
-        "no-trailing-spaces": "error",
 
         /**
          * 禁止在 function 的左括号前使用空格
@@ -287,6 +244,7 @@ module.exports = {
         ],
 
         /**
+         * @TODO 是否可选 缩进2
          * 强制使用空格缩进4
          */
         "indent": [
